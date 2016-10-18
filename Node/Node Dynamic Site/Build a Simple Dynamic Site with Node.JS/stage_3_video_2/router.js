@@ -1,4 +1,5 @@
 var Profile = require("./profile.js");
+var renderer = require("./renderer.js")
 
 //Handle HTTP route GET / and POST / i.e. Home
 function home(request, response) {
@@ -6,9 +7,10 @@ function home(request, response) {
   if(request.url === "/") {
     //show search
     response.writeHead(200, {'Content-Type': 'text/plain'});  
-    response.write("Header\n");
-    response.write("Search\n");
-    response.end('Footer\n');
+    renderer.view("header", {}, response);
+    renderer.view("search", {}, response);
+    renderer.view("footer", {}, response);
+    response.end();
   }
   //if url == "/" && POST
     //redirect to /:username
